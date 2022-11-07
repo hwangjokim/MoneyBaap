@@ -1,9 +1,10 @@
 <script>
     export let buttonType = 'primary';
     export let selectPriceRange = false;
+    import {push } from 'svelte-spa-router'
 </script>
 
-<button class={buttonType} class:selectPriceRange={selectPriceRange}>
+<button class={buttonType} class:selectPriceRange={selectPriceRange} on:click={() => push("/search")}>
     <slot>음식점 찾기</slot>
 </button>
 

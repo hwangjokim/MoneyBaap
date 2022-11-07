@@ -19,6 +19,7 @@
     "svelte-range-slider-pips": "^2.0.3"
   },
   "dependencies": {
-    "sirv-cli": "^2.0.0"
+    "sirv-cli": "^2.0.0",
+    "svelte-spa-router": "^3.3.0"
   }
 }
