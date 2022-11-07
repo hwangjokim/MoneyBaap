@@ -1,5 +1,4 @@
 <script>
-    export let title="Search View"
 </script>
 
 <main>
