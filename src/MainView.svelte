@@ -1,8 +1,7 @@
 <script>
-	import RangeSlider from "svelte-range-slider-pips";
-	import Button from "./buttonComponent.svelte";
+	import RangeSlider from "./components/rangeSliderComponent.svelte";
+	import Button from "./components/buttonComponent.svelte";
 	
-	let vls = [0,10000] 
 	let minPrice=0;
 	let maxPrice=0;
 </script>
@@ -11,17 +10,7 @@
 	<h1>안숭맛춤</h1>
 	<h2>얼마 쓸래?</h2>
 	<div class=slider>
-		<RangeSlider bind:minPrice bind:maxPrice
-			float 
-			step={1000}
-			pipstep={5}
-			pushy=true
-			range values={vls}
-			min={0} max={20000}
-			all='label'
-			pips
-			on:change={(e)=>minPrice=e.detail.values[0]}
-			on:change={(e)=>maxPrice=e.detail.values[1]}/>
+		<RangeSlider bind:minPrice bind:maxPrice/>
 	</div>
 	<Button selectPriceRange={true}/>
 </main>
@@ -38,6 +27,8 @@
 		margin:0 auto;
 	}
 	.slider{
+		width:800px;
+		align-content:center;
 		padding:4em;
 	}
 	h2{

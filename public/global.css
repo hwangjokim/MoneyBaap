@@ -63,6 +63,8 @@ button:focus {
 }
 
 .slider{
+	display:block;
+	margin:0px auto;
 	--range-slider:          #d7dada; /* slider main background color */
 	--range-handle-inactive: #ffc7c7; /* inactive handle color */
 	--range-handle:          #ffc7c7; /* non-focussed handle color */
