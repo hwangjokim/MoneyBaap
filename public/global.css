@@ -82,3 +82,9 @@ button:focus {
 	background-size:cover;
 	background-color: #ff6f6f;
 }
+.search_bg{
+	background-image:url('./search_bg.jpg');
+	height:100vh;
+	background-size:cover;
+	background-color: #ff6f6f;
+}

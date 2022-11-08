@@ -3,7 +3,7 @@
 <div class="container">
     <div class="navbar-brand">
     <div class="navbar-item">
-        <img src="/fork.png" alt="Logo" />
+        <img src="/logo.png" alt="Logo" />
     </div>
     </div>
     <div class="navbar-menu">

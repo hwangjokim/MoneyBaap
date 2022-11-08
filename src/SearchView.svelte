@@ -1,6 +1,6 @@
 <script>
-    import Navbar from "./Navbar.svelte";
-    import RangeSlider from "svelte-range-slider-pips";
+    import Navbar from "./components/Navbar.svelte";
+    import RangeSlider from "./components/rangeSliderComponent.svelte";
     export const title = "Search View";
     let search_value = "굶어";
     let vls = [0, 10000];
@@ -10,10 +10,14 @@
     <div class="hero-head">
         <Navbar />
     </div>
-
-    <div class="container is-widescreen" style="margin-top: 100px;">
-        <div class="field has-addons">
-            <div class="control has-icons-left" style="width: 600px;">
+    <div class="search_bg">
+    <div class="hero-body">
+        
+    <div class="container has-text-centered" style="margin-top: 100px;">
+        <div class="field has-addons" style="width: 700px;
+        margin-left: auto;
+        margin-right: auto;">
+            <div class="control has-icons-left" style="width: 600px; ">
                 <input
                     class="input is-focused"
                     type="text"
@@ -27,19 +31,10 @@
                 <button class="button is-info"> 검색 </button>
             </div>
         </div>
-        <div class="slider" style="margin-top: 50px;">
-            <RangeSlider
-                float
-                step={1000}
-                pipstep={5}
-                pushy="true"
-                range
-                values={vls}
-                min={0}
-                max={20000}
-                all="label"
-                pips
-            />
+        <div class="slider" style="margin-top: 50px; width:1000px">
+            <RangeSlider />
         </div>
     </div>
+</div>
+</div>
 </section>
