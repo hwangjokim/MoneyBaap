@@ -5,37 +5,39 @@
 	let minPrice=0;
 	let maxPrice=0;
 </script>
-
 <main>
 	<div class=bg alt="no img">
-		<h2>얼마 쓸래?</h2>
+		<div class="title">
+		<p>얼마 쓸래?</p>
+	</div>
 		<div class=slider>
-			<RangeSlider bind:minPrice bind:maxPrice/>
+			<RangeSlider />
 		</div>
+		<div style="margin-top: 70px">
 		<Button selectPriceRange={true}/>
+	</div>
 	</div>
 </main>
 
-<div class=labels>
+<!-- <div class=labels>
 	<p1> minPrice = {minPrice} // </p1>
 	<p2> maxPrice = {maxPrice}</p2>
-</div>
-
+</div> -->
 <style>
 	main{
 		text-align:center;
-		padding:4em;
-		margin:0 auto;
+		/* margin: auto; */
 	}
 	.slider{
 		width:800px;
 		align-content:center;
 		padding:1em;
 	}
-	h2{
-		padding:8.5em;
+	.title{
+		margin-top: 30px;
+		padding-top: 9em;	
 	}
-	.labels{
+	/* .labels{
 		text-align:center;
-	}
+	} */
 </style>
