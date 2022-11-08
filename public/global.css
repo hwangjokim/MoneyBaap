@@ -76,3 +76,9 @@ button:focus {
 	--range-float:           #ff6f6f; /* floating label background color */
 	--range-float-text:      rgb(255, 255, 255); /* text color on floating label */
 }
+.bg{
+	background-image:url('./background.png');
+	height:100vh;
+	background-size:cover;
+	background-color: #ff6f6f;
+}

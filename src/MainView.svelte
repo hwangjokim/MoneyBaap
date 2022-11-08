@@ -7,12 +7,13 @@
 </script>
 
 <main>
-	<h1>안숭맛춤</h1>
-	<h2>얼마 쓸래?</h2>
-	<div class=slider>
-		<RangeSlider bind:minPrice bind:maxPrice/>
+	<div class=bg alt="no img">
+		<h2>얼마 쓸래?</h2>
+		<div class=slider>
+			<RangeSlider bind:minPrice bind:maxPrice/>
+		</div>
+		<Button selectPriceRange={true}/>
 	</div>
-	<Button selectPriceRange={true}/>
 </main>
 
 <div class=labels>
@@ -29,10 +30,10 @@
 	.slider{
 		width:800px;
 		align-content:center;
-		padding:4em;
+		padding:1em;
 	}
 	h2{
-		padding:2em;
+		padding:8.5em;
 	}
 	.labels{
 		text-align:center;
