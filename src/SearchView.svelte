@@ -6,14 +6,14 @@
     let vls = [0, 10000];
 </script>
 
-<section class="hero">
-    <div class="hero-head">
+<section class="hero" style="width: auto;">
+    <div class="hero-head" >
         <Navbar />
     </div>
     <div class="search_bg">
     <div class="hero-body">
         
-    <div class="container has-text-centered" style="margin-top: 100px;">
+    <div class="container" style="margin-top: 100px;">
         <div class="field has-addons" style="width: 700px;
         margin-left: auto;
         margin-right: auto;">
