@@ -12,6 +12,7 @@
         words.push(searcher);
         words=words
         searcher=""
+        search_btn="추가"
         }
         if (words.length==5){
             search_btn="X"
