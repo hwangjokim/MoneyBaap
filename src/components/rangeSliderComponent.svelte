@@ -1,5 +1,7 @@
 <script>
     import RangeSlider from "svelte-range-slider-pips";
+    export let minvlu;
+    export let maxvlu;
 </script>
 <div class=slider>
     <RangeSlider
@@ -8,9 +10,9 @@
         pipstep={5}
         pushy=true
         range=true
-        values={[0,10000]}
         min={0}
         max={20000}
+        values = {[minvlu,maxvlu]}
         all='label'
         pips=true
 		/>

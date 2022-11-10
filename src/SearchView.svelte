@@ -7,6 +7,9 @@
     let words = [];
     let searcher="";
     let search_btn="검색";
+    export let minPrice;
+    export let maxPrice;
+
     let addWord = () =>{
         if (words.length < 5){
         words.push(searcher);
@@ -60,7 +63,9 @@
             </div>
 
             <div class="slider" style="margin-top: 50px; width:1000px">
-                <RangeSlider />
+                <RangeSlider bind:minPrice bind:maxPrice
+                    minvlu={minPrice}
+                    maxvlu={maxPrice}/>
             </div>
         </div>
     </div>

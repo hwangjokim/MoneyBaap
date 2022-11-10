@@ -1,17 +1,21 @@
 <script>
 	import RangeSlider from "./components/rangeSliderComponent.svelte";
 	import Button from "./components/buttonComponent.svelte";
-	
-	let minPrice=0;
-	let maxPrice=0;
+	import {priceRange} from "./store.js";
+	let minPrice;
+	let maxPrice;
+	let minvlu=0;
+	let maxvlu=10000;
 </script>
 <main>
 	<div class=bg alt="no img">
 		<div class="title">
 		<p>얼마 쓸래?</p>
 	</div>
-		<div class=slider>
-			<RangeSlider />
+		<div class="slider">
+			<RangeSlider bind:minPrice bind:maxPrice
+			 priceRange.update(minvlu=>minPrice)
+			 maxvlu={maxvlu}/>
 		</div>
 		<div style="margin-top: 70px">
 		<Button selectPriceRange={true}/>
