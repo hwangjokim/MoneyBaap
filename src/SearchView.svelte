@@ -2,33 +2,29 @@
     import Navbar from "./components/Navbar.svelte";
     import RangeSlider from "./components/rangeSliderComponent.svelte";
     import WordList from "./components/WordList.svelte";
-    import {minvlu} from "./store.js"
-	import {maxvlu} from "./store.js"
-    
+    import { minvlu } from "./store.js";
+    import { maxvlu } from "./store.js";
+
     export const title = "Search View";
-    let search_value = "돈까스";
+    let searchHint = "돈까스";
     let words = [];
-    let searcher="";
-    let search_btn="검색";
-    export let minPrice;
-    export let maxPrice;
+    let searcher = "";
+    let searchButton = "검색";
 
-    let addWord = () =>{
-        if (words.length < 5){
-        words.push(searcher);
-        words=words
-        searcher=""
-        search_btn="추가"
+    let addWord = () => {
+        if (words.length < 5) {
+            words.push(searcher);
+            words = words;
+            searcher = "";
+            searchButton = "추가";
         }
-        if (words.length==5){
-            search_btn="X"
+        if (words.length == 5) {
+            searchButton = "X";
         }
-    }
-    let onHandleDelete = text =>{
-        words=words.filter((element) => element!==text);
-    }
-
-
+    };
+    let onHandleDelete = (text) => {
+        words = words.filter((element) => element !== text);
+    };
 </script>
 
 <section class="hero" style="width: auto;">
@@ -48,7 +44,7 @@
                         <input
                             class="input is-focused"
                             type="text"
-                            placeholder={search_value}
+                            placeholder={searchHint}
                             bind:value={searcher}
                         />
                         <span class="icon is-small is-left">
@@ -56,19 +52,18 @@
                         </span>
                     </div>
                     <div class="control">
-                        <button class="button is-info" on:click={addWord}>{search_btn} </button>
+                        <button class="button is-info" on:click={addWord}
+                            >{searchButton}
+                        </button>
                     </div>
-                    
                 </div>
                 <div class="container" style="text-align: center;">
-                        
-                        <WordList {words} {onHandleDelete} />
-                    </div>
+                    <WordList {words} {onHandleDelete} />
+                </div>
             </div>
 
             <div class="slider" style="margin-top: 50px; width:1000px">
-                <RangeSlider bind:$minvlu bind:$maxvlu
-			 />
+                <RangeSlider bind:$minvlu bind:$maxvlu />
             </div>
         </div>
     </div>
