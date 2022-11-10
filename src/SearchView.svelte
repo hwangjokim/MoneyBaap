@@ -2,6 +2,9 @@
     import Navbar from "./components/Navbar.svelte";
     import RangeSlider from "./components/rangeSliderComponent.svelte";
     import WordList from "./components/WordList.svelte";
+    import {minvlu} from "./store.js"
+	import {maxvlu} from "./store.js"
+    
     export const title = "Search View";
     let search_value = "돈까스";
     let words = [];
@@ -24,6 +27,7 @@
     let onHandleDelete = text =>{
         words=words.filter((element) => element!==text);
     }
+
 
 </script>
 
@@ -63,9 +67,8 @@
             </div>
 
             <div class="slider" style="margin-top: 50px; width:1000px">
-                <RangeSlider bind:minPrice bind:maxPrice
-                    minvlu={minPrice}
-                    maxvlu={maxPrice}/>
+                <RangeSlider bind:$minvlu bind:$maxvlu
+			 />
             </div>
         </div>
     </div>

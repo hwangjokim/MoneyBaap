@@ -1,7 +1,7 @@
 <script>
     import RangeSlider from "svelte-range-slider-pips";
-    export let minvlu;
-    export let maxvlu;
+    import {minvlu} from "../store.js"
+	import {maxvlu} from "../store.js"
 </script>
 <div class=slider>
     <RangeSlider
@@ -12,9 +12,11 @@
         range=true
         min={0}
         max={20000}
-        values = {[minvlu,maxvlu]}
+        values = {[$minvlu,$maxvlu]}
         all='label'
         pips=true
-		/>
+            on:change={(e)=>$minvlu=e.detail.values[0]}
+			on:change={(e)=>$maxvlu=e.detail.values[1]}
+        />
 </div>
 
