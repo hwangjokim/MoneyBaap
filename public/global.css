@@ -76,15 +76,18 @@ button:focus {
 	--range-float:           #ff6f6f; /* floating label background color */
 	--range-float-text:      rgb(255, 255, 255); /* text color on floating label */
 }
-.bg{
-	background-image:url('./background.png');
-	height:100vh;
-	background-size:cover;
-	background-color: #ff6f6f;
-}
-.search_bg{
-	background-image:url('./search_bg.jpg');
-	height:100vh;
-	background-size:cover;
-	background-color: #ff6f6f;
-}
+
+	.bg{
+		background-image:url('./background.png');
+		background-size:cover;
+		background-color: #ff6f6f;
+		height:100vh;
+	}
+	.search_bg{
+		background-image:url('./search_bg.jpg');
+		height:100vh;
+		background-size:cover;
+		background-color: #ff6f6f;
+	}
+
+

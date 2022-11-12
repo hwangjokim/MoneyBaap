@@ -20,3 +20,4 @@
         on:change={(e) => ($maxvlu = e.detail.values[1])}
     />
 </div>
+

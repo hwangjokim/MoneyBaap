@@ -1,3 +1,5 @@
+<!-- 11/13 commit : npm install 해주세요 -->
+
 <script>
 	import RangeSlider from "./components/rangeSliderComponent.svelte";
 	import Button from "./components/buttonComponent.svelte";
@@ -10,8 +12,12 @@
 	<title>{title}</title>
 </svelte:head>
 
-<main>
+<section class="hero" style="width: auto;">
 	<div class="bg" alt="no img">
+		
+		<div class="logo">
+		<img class="img" src="/logo.png" alt="Logo" />
+		</div>
 		<div class="title">
 			<p>얼마 쓸래?</p>
 		</div>
@@ -22,20 +28,13 @@
 			<Button selectPriceRange={true} />
 		</div>
 	</div>
-</main>
+</section>
 
-<style>
-	main {
-		text-align: center;
-		/* margin: auto; */
-	}
-	.slider {
-		width: 800px;
-		align-content: center;
-		padding: 1em;
-	}
-	.title {
-		margin-top: 30px;
-		padding-top: 9em;
-	}
+
+<style lang="scss">
+	
+	@import "scss/MainViewCss.scss"
+	
+
+	
 </style>
