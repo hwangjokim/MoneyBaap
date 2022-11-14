@@ -14,17 +14,12 @@ section {
 
 .logo{
     position: relative;
+    
     margin-top: auto;
-
     @include widescreen{
-        top:160px;
+        top:185px;
     }
-    @include desktop-only{
-        top:160px
-    }
-    @include tablet-only{
-        top:140px
-    }
+
     @include mobile{
         top:120px;
     }
@@ -37,16 +32,7 @@ section {
         width: 20%;
         height: 20%;
     }
-    @include desktop-only{
-        object-fit: fit;
-        width: 35%;
-        height: 35%;
-    }
-    @include tablet-only{
-        object-fit: fit;
-        width: 45%;
-        height: 45%;
-    }
+    
     @include mobile{
         object-fit: fit;
         width: 55%;
@@ -63,25 +49,15 @@ section {
 }
 
 .slider {
-    @include widescreen{
+    @include widescreen {
         width: 800px;
         align-content: center;
         padding: 1em;
-    }
-    @include desktop-only{
-        width: auto;
-        align-content: center;
-        padding: 3em;
-    }
-    @include tablet-only{
-        width: auto;
-        align-content: center;
-        padding: 2em;
-    }
+}
     @include mobile{
         width: auto;
         align-content: center;
-        padding: 2em;
+        padding: 1em;
     }
     
 }
@@ -93,19 +69,13 @@ section {
         margin-top: 30px;
         font-size: 36pt;
     }
-    @include desktop-only{
-        padding-top: 5em;
-        margin-top: 30px;
-        font-size: 30pt;
-    }
-    @include tablet-only{
-        padding-top: 5em;
-        margin-top: 30px;
-        font-size: 25pt;
-    }
+
     @include mobile{
         margin-top: 30px;
         font-size: 20pt;
         padding-top: 5em;
     }
+
+    
+    
 }

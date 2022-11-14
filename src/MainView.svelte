@@ -16,7 +16,7 @@
 	<div class="bg" alt="no img">
 		
 		<div class="logo">
-		<img class="img" src="/logo.png" alt="Logo" />
+			<img class="img" src="/logo.png" alt="Logo" />
 		</div>
 		<div class="title">
 			<p>얼마 쓸래?</p>
@@ -32,9 +32,5 @@
 
 
 <style lang="scss">
-	
 	@import "scss/MainViewCss.scss"
-	
-
-	
 </style>
