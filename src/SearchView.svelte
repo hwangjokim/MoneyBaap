@@ -6,17 +6,23 @@
     import { maxvlu } from "./store.js";
 
     export const title = "Search View";
-    let searchHint = "돈까스";
+    let searchHint = "남은 메뉴 키워드 : 5/5";
     let words = [];
     let searcher = "";
     let searchButton = "검색";
 
+    let modifySearchHint =()=>{
+        searchHint="남은 메뉴 키워드 : " + (5-words.length) + "/5";
+    }
     let addWord = () => {
         if (words.length < 5) {
+            if (searcher.trim()!==""){
             words.push(searcher);
             words = words;
+            modifySearchHint();
+            searchButton = "검색";
+            }
             searcher = "";
-            searchButton = "추가";
         }
         if (words.length == 5) {
             searchButton = "X";
@@ -24,6 +30,7 @@
     };
     let onHandleDelete = (text) => {
         words = words.filter((element) => element !== text);
+        modifySearchHint();
     };
 </script>
 
@@ -33,14 +40,9 @@
     </div>
     <div class="search_bg">
         <div class="hero-body">
-            <div class="container" style="margin-top: 100px;">
-                <div
-                    class="field has-addons"
-                    style="width: 700px;
-        margin-left: auto;
-        margin-right: auto;"
-                >
-                    <div class="control has-icons-left" style="width: 600px; ">
+            <div class="container search">
+                <div class="field has-addons">
+                    <div class="control has-icons-left">
                         <input
                             class="input is-focused"
                             type="text"
@@ -57,12 +59,12 @@
                         </button>
                     </div>
                 </div>
-                <div class="container" style="text-align: center;">
+                <div class="container wordlist" style="text-align: center;">
                     <WordList {words} {onHandleDelete} />
                 </div>
             </div>
 
-            <div class="slider" style="margin-top: 50px; width:1000px">
+            <div class="slider">
                 <RangeSlider bind:$minvlu bind:$maxvlu />
             </div>
         </div>

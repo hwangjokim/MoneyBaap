@@ -8,5 +8,5 @@
 </script>
 
     {#each words as word}
-    <WordItem {word} {onHandleDelete}/>
+    <WordItem {word} {onHandleDelete} />
     {/each}

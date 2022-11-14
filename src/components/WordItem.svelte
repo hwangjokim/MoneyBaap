@@ -1,5 +1,5 @@
 <script>
-    export let onHandleDelete
+    export let onHandleDelete;
     export let word;
 </script>
     

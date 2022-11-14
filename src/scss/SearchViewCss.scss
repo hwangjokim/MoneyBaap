@@ -5,15 +5,122 @@
     src : url("/hanna.ttf")
 }
 
+section{
+    overflow: hidden;
+    height:100%;
+}
 
 .hero-head{
     width: auto;
 }
 
-.bg{
-        
+.search_bg{
         background-image:url('/background.png');
 		background-size:cover;
 		background-color: #0000f6;
 		// height:100vh;
+}
+
+.field{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    @include widescreen{
+        padding: 1em 1em 0em 1em;
+        align-content: center;
+    }
+    @include desktop-only{
+        padding:5em 10em 2em 10em;
+        align-content: center;
+    }
+    @include tablet-only{
+        width:auto;
+        padding:0em 10em 0em 10em;
+        align-content: center;
+    }
+    @include mobile{
+        width:auto;
+        height:auto;
+        padding:0em 1em 0em 1em;
+        align-content: center;
+    }
+}
+.has-icons-left{
+    @include widescreen{
+        width: 1000px;
+    }
+    @include desktop-only{
+        width: 903px;
+    }
+    @include tablet-only{
+        width: 800px;
+    }
+    @include mobile{
+        width: 700px;
+    }
+}
+
+.slider{
+    @include widescreen{
+        width: auto;
+        align-content: center;
+        padding: 0.5em 15em 0.2em 15em;
+    }
+    @include desktop-only{
+        width: auto;
+        align-content: center;
+        padding: 0.5em;
+    }
+    @include tablet-only{
+        width: auto;
+        align-content: center;
+        padding: 0.5em;
+    }
+    @include mobile{
+        width: auto;
+        align-content: center;
+        padding: 0.5em;
+    }
+}
+.wordlist{
+    @include widescreen{
+        padding:1em;
+    }
+    @include desktop-only{
+        padding:0.7em;
+    }
+    @include tablet-only{
+        padding:0.4em;
+    }
+    @include mobile{
+        padding:0.1em;
+    }
+}
+.has-addons{
+    @include widescreen{
+
+    }
+    @include desktop-only{
+
+    }
+    @include tablet-only{
+
+    }
+    @include mobile{
+        
+    }
+}
+.has-addons{
+    @include widescreen{
+
+    }
+    @include desktop-only{
+
+    }
+    @include tablet-only{
+
+    }
+    @include mobile{
+        
+    }
 }
