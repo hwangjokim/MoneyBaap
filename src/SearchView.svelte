@@ -70,3 +70,7 @@
     
 
 </section>
+
+<style lang="scss">
+	@import "scss/SearchViewCss.scss"
+</style>

@@ -2,42 +2,12 @@
 
 @font-face {
     font-family : '고딕';
-    src : url("/NanumSquare.ttf")
+    src : url("/hanna.ttf")
 }
 
-section {
-    text-align: center;
-    overflow: hidden;
-    height: 100%;
-    //margin: auto;
-}
 
-.logo{
-    position: relative;
-    
-    margin-top: auto;
-    @include widescreen{
-        top:185px;
-    }
-
-    @include mobile{
-        top:120px;
-    }
-    
-}
-
-.img{
-    @include widescreen{
-        object-fit: fit;
-        width: 20%;
-        height: 20%;
-    }
-    
-    @include mobile{
-        object-fit: fit;
-        width: 55%;
-        height: 55%;
-    }
+.hero-head{
+    width: auto;
 }
 
 .bg{
@@ -46,36 +16,4 @@ section {
 		background-size:cover;
 		background-color: #0000f6;
 		// height:100vh;
-}
-
-.slider {
-    @include widescreen {
-        width: 800px;
-        align-content: center;
-        padding: 1em;
-}
-    @include mobile{
-        width: auto;
-        align-content: center;
-        padding: 1em;
-    }
-    
-}
-.title {
-    font-family: '고딕';
-    
-    @include widescreen{
-        padding-top: 5em;
-        margin-top: 30px;
-        font-size: 36pt;
-    }
-
-    @include mobile{
-        margin-top: 30px;
-        font-size: 20pt;
-        padding-top: 5em;
-    }
-
-    
-    
 }
