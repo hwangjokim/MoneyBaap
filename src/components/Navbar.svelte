@@ -1,5 +1,5 @@
 <!-- component/Navbar.svelte -->
-<header class="navbar">
+<header class="navbar is-fixed-top">
 <div class="container">
     <div class="navbar-brand">
     <div class="navbar-item">
@@ -25,3 +25,4 @@
     </div>
 </div>
 </header>
+
