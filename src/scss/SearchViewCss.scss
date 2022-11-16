@@ -6,7 +6,8 @@
 }
 
 section{
-    
+    height: 100%;
+    overflow: hidden;
 }
 
 .hero-head{
@@ -17,6 +18,7 @@ section{
         background-image:url('/background.png');
 		background-size:cover;
 		background-color: #0000f6;
+        background-attachment: fixed;
         
 		// height:100vh;
 }
@@ -96,6 +98,11 @@ section{
         padding:0.1em;
     }
 }
+.sibal{
+    overflow: scroll;
+    max-height: 100%;
+}
+
 .has-addons{
     @include widescreen{
 
