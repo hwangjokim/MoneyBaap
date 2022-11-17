@@ -32,7 +32,7 @@ section{
         align-content: center;
     }
     @include desktop-only{
-        padding:5em 10em 2em 10em;
+        padding:1em 10em 0.3em 10em;
         align-content: center;
     }
     @include tablet-only{
@@ -99,35 +99,44 @@ section{
     }
 }
 .sibal{
-    overflow: scroll;
-    max-height: 100%;
-}
-
-.has-addons{
+    overflow-x:hidden;
+    overflow-y:scroll;
+    margin-top: 2em;
     @include widescreen{
-
+        width: auto;
+        align-content: center;
+        padding: 0.5em 15em 0.2em 15em;
+        // margin-right: 15em;
+        max-height:24em;
     }
     @include desktop-only{
-
+        width: auto;
+        align-content: center;
+        margin: 0.5em;
+        max-height:22em;
     }
     @include tablet-only{
-
+        width: auto;
+        align-content: center;
+        margin: 0.5em;
+        max-height:26.3em;
     }
     @include mobile{
-        
+        width: auto;
+        align-content: center;
+        margin: 0.5em;
+        max-height:26em;
     }
 }
-.has-addons{
-    @include widescreen{
 
-    }
-    @include desktop-only{
-
-    }
-    @include tablet-only{
-
-    }
-    @include mobile{
-        
-    }
+.sibal::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+.sibal::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #6a91bd; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+.sibal::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }

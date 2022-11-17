@@ -6,6 +6,7 @@
     import { apiData, places } from "./apis/api.js";
     import { minvlu } from "./store.js";
     import { maxvlu } from "./store.js";
+    import Box from './components/Box.svelte';
 
     export const title = "Search View";
     let searchHint = "남은 메뉴 키워드 : 5/5";
@@ -45,6 +46,10 @@
                 return [];
             });
     });
+
+    let gridCount=()=>{
+
+    }
 </script>
 
 <section class="hero" style="width: auto;">
@@ -80,16 +85,27 @@
                 <RangeSlider bind:$minvlu bind:$maxvlu />
             </div>
             <div class="sibal">
+            <div class="gaesibal">
             <dl>
+                <!-- {#each $places as place}
+                <dt>{place.name}  ★ : {place.star} | {place.locate}</dt>
+                        {#each place.menus as menu_list}
+                            <dd>{menu_list[0]}, {menu_list[1]}</dd>
+                            <!-- <img src={menu_list[2]}  alt="img"> -->
+                        
                 {#each $places as place}
-                    <dt>{place.name} ★ : {place.star} | {place.locate}</dt>
                     {#each place.menus as menu_list}
-                        <dd>{menu_list[0]}, {menu_list[1]}</dd>
-                        <!-- <img src={menu_list[2]}  alt="img"> -->
+                        <Box>
+                            <slot><img src={menu_list[2]} alt="img"/></slot>
+                            <dd>{menu_list[0]}   {menu_list[1]}</dd>
+                            
+                            <dt>{place.name} | {place.locate}</dt>
+                            <ds>★ : {place.star}</ds>
+                        </Box>
                     {/each}
-                    <hr />
                 {/each}
             </dl>
+            </div>
             </div>
         </div>
     </div>
