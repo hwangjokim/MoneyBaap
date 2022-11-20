@@ -19,7 +19,7 @@ section{
 		background-size:cover;
 		background-color: #0000f6;
         background-attachment: fixed;
-        
+
 		// height:100vh;
 }
 
@@ -84,7 +84,9 @@ section{
         padding: 0.5em;
     }
 }
+
 .wordlist{
+    font-family: '고딕';
     @include widescreen{
         padding:1em;
     }
@@ -98,14 +100,36 @@ section{
         padding:0.1em;
     }
 }
-.sibal{
+
+.is-radio{
+    font-family: '고딕';
+    @include widescreen{
+        align-content: center;
+        margin: 0.5em 50em 0em 15em;
+    }
+    @include desktop-only{
+        align-content: center;
+        margin: 15em;
+    }
+    @include tablet-only{
+        align-content: center;
+        margin: 0.5em;
+    }
+    @include mobile{
+        align-content: center;
+        margin: 0.5em;
+    }
+}
+
+.listOfPlace{
+    font-family: '고딕';
     overflow-x:hidden;
     overflow-y:scroll;
     margin-top: 2em;
     @include widescreen{
         width: auto;
         align-content: center;
-        padding: 0.5em 15em 0.2em 15em;
+        padding: 0em 15em 0.2em 15em;
         // margin-right: 15em;
         max-height:24em;
     }
@@ -129,14 +153,43 @@ section{
     }
 }
 
-.sibal::-webkit-scrollbar {
+.box{
+    align-content:vertical;
+    float:left;
+    border: 1px solid #aaa;
+    width:46.5%;
+    max-height:33%;
+    border-radius: 7px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    padding: 1em;
+    margin: 0 1em 1em 0;
+}
+
+img{
+    height:100px;
+    width:100px;
+}
+.pic{
+    float:left;
+    margin-right:1em;
+}
+
+.menuInfo{
+    width:100%;
+    max-height:fit-content;
+    margin-left:2em;
+}
+
+.listOfPlace::-webkit-scrollbar {
     width: 8px;  /* 스크롤바의 너비 */
 }
-.sibal::-webkit-scrollbar-thumb {
+
+.listOfPlace::-webkit-scrollbar-thumb {
     height: 30%; /* 스크롤바의 길이 */
     background: #6a91bd; /* 스크롤바의 색상 */
     border-radius: 10px;
 }
-.sibal::-webkit-scrollbar-track {
+
+.listOfPlace::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
