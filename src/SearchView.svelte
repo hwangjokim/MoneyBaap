@@ -55,6 +55,7 @@
 <style lang="scss">
   @import 'scss/SearchViewCss.scss';
 </style> 
+
 <section class="hero" style="width: auto;">
   <div class="hero-head">
     <Navbar />
@@ -111,7 +112,7 @@
 
               {#each place.menus as menu_list}
                 <!-- <div class="container"> -->
-                <a href={place.link} target="_blank">
+                <a href={place.link} target="_blank" rel="noreferrer">
                 <div class="box" >
                   <slot>
                     <div class="pic">
@@ -120,6 +121,8 @@
                       {:else}
                         <img data-src={alt} use:lazyImage/>
                       {/if}
+                      
+
                     </div>
                     <div class="menuInfo">
                       <slot>
