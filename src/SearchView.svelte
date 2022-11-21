@@ -7,6 +7,7 @@
   import { minvlu } from './store.js'
   import { maxvlu } from './store.js'
   import {useLazyImage as lazyImage} from 'svelte-lazy-image'
+  import LazyLoad from '@dimfeld/svelte-lazyload';
 
   export const title = 'Search View'
   let searchHint = '남은 메뉴 키워드 : 5/5'
@@ -39,7 +40,7 @@
     fetch('http://127.0.0.1:5921/contacts') // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         apiData.set(data)
       })
       .catch((error) => {
@@ -53,8 +54,7 @@
 
 <style lang="scss">
   @import 'scss/SearchViewCss.scss';
-</style>
-
+</style> 
 <section class="hero" style="width: auto;">
   <div class="hero-head">
     <Navbar />
@@ -98,6 +98,7 @@
       </div>
 
       <div class="listOfPlace">
+      
           <dl>
             <!-- {#each $places as place}
                 <dt>{place.name}  ★ : {place.star} | {place.locate}</dt>
@@ -106,9 +107,12 @@
                             <!-- <img src={menu_list[2]}  alt="img"> -->
 
             {#each $places as place}
+                <LazyLoad>
+
               {#each place.menus as menu_list}
                 <!-- <div class="container"> -->
-                <div class="box">
+                <a href={place.link} target="_blank">
+                <div class="box" >
                   <slot>
                     <div class="pic">
                       {#if menu_list[2] !== null}
@@ -127,7 +131,10 @@
                   </slot>
                 </div>
                 <!-- </div> -->
+                </a>
+                
               {/each}
+              </LazyLoad>
             {/each}
           </dl>
       </div>
