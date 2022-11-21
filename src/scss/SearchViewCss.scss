@@ -105,11 +105,11 @@ section{
     font-family: '고딕';
     @include widescreen{
         align-content: center;
-        margin: 0.5em 50em 0em 15em;
+        margin: 0.5em 1em 0em 15em;
     }
     @include desktop-only{
         align-content: center;
-        margin: 15em;
+        margin: 0.5em 0em 1em 1em;
     }
     @include tablet-only{
         align-content: center;
@@ -126,18 +126,19 @@ section{
     overflow-x:hidden;
     overflow-y:scroll;
     margin-top: 2em;
+
     @include widescreen{
         width: auto;
         align-content: center;
         padding: 0em 15em 0.2em 15em;
         // margin-right: 15em;
-        max-height:24em;
+        max-height:25.8em;
     }
     @include desktop-only{
         width: auto;
         align-content: center;
         margin: 0.5em;
-        max-height:22em;
+        max-height:26.5em;
     }
     @include tablet-only{
         width: auto;
@@ -152,6 +153,24 @@ section{
         max-height:26em;
     }
 }
+// .m_nmae{
+//     font-family: '고딕';
+//     @include widescreen{
+//         font-size: 36pt;
+//     }
+//     @include desktop-only{
+//         font-size: 30pt;
+//     }
+//     @include tablet-only{
+//         font-size: 25pt;
+//     }
+//     @include mobile{
+//         font-size: 50pt;
+//     }
+// }
+.box:hover{ 
+    background-color: #dae4f5;
+}
 
 .box{
     align-content:vertical;
@@ -163,11 +182,16 @@ section{
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
     padding: 1em;
     margin: 0 1em 1em 0;
+    transition: all 0.4s;
+    @include mobile{
+        width: 95%;
+        height: 30%;
+    }
 }
 
 img{
-    height:100px;
-    width:100px;
+    height:85px;
+    width:85px;
 }
 .pic{
     float:left;

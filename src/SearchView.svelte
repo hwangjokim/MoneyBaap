@@ -88,11 +88,11 @@
       </div>
       <div class="control is-radio">
         <label class="radio">
-          <input type="radio" name="foobar" />
+          <input type="radio" name="foobar" checked />
           최저가순
         </label>
         <label class="radio">
-          <input type="radio" name="foobar" checked />
+          <input type="radio" name="foobar" />
           최고가순
         </label>
       </div>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="menuInfo">
                       <slot>
-                        <dd>{menu_list[0]} </dd>
+                        <div class=m_name style="font-weight:bold">{menu_list[0]} </div>
                         <ds>{menu_list[1]} </ds>
                         <dt>{place.name}   |   ★ : {place.star}</dt>
                       </slot>

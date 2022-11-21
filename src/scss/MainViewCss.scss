@@ -64,17 +64,17 @@ section {
     @include widescreen{
         width: auto;
         align-content: center;
-        padding: 2em 15em 0.2em 15em
+        padding: 1em 15em 1em 15em
     }
     @include desktop-only{
         width: auto;
         align-content: center;
-        padding: 3em;
+        padding: 1em 3em 1em 3em;
     }
     @include tablet-only{
         width: auto;
         align-content: center;
-        padding: 3em;
+        padding: 3em 3em 1em 3em;
     }
     @include mobile{
         width: auto;
@@ -105,5 +105,31 @@ section {
         margin-top: 30px;
         font-size: 20pt;
         padding-top: 5em;
+    }
+}
+
+//style="margin-top: 70px"
+
+.university{
+    font-family: '고딕';
+    font-size: 20pt;
+    @include widescreen{
+        align-content: center;
+        margin: 1em auto 2em auto;
+    }
+    @include desktop-only{
+        font-size:15pt;
+        align-content: center;
+        margin: 1em 15em 2em 15em;
+    }
+    @include tablet-only{
+        font-size:15pt;
+        align-content: center;
+        margin: 1em 0.5em 4em 0.5em;
+    }
+    @include mobile{
+        align-content: center;
+        font-size: 15pt;
+        margin: 0.5em 0.5em 4em 0.5em;
     }
 }

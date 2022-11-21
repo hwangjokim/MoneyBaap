@@ -24,7 +24,23 @@
 		<div class="slider">
 			<RangeSlider bind:$minvlu bind:$maxvlu />
 		</div>
-		<div style="margin-top: 70px">
+
+		<div class="university">
+			<label class="radio">
+          		<input type="radio" name="foobar" checked />
+          		서울대학교
+        	</label>
+        	<label class="radio">
+         		<input type="radio" name="foobar" />
+				숭실대학교
+        	</label>
+			<label class="radio">
+         		<input type="radio" name="foobar" />
+				중앙대학교
+        	</label>
+		</div>
+
+		<div>
 			<Button selectPriceRange={true} />
 		</div>
 	</div>
