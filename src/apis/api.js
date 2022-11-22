@@ -10,5 +10,12 @@ export const places = derived(apiData, ($apidata) => {
     if ($apidata.food) {
         return $apidata.food;
     }
+    else if ($apidata.SeoulNatl){
+        return $apidata.SeoulNatl;
+    }
+    else if ($apidata.cau){
+        return $apidata.cau;
+    }
     return [];
 });
+    

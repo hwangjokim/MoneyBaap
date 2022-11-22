@@ -6,6 +6,7 @@
   import { apiData, places } from './apis/api.js'
   import { minvlu } from './store.js'
   import { maxvlu } from './store.js'
+  import {radioValue} from './store.js'
   import {useLazyImage as lazyImage} from 'svelte-lazy-image'
   import LazyLoad from '@dimfeld/svelte-lazyload';
 
@@ -37,7 +38,7 @@
   }
 
   onMount(async () => {
-    fetch('http://127.0.0.1:5921/contacts') // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+    fetch('http://127.0.0.1:5921/'+$radioValue.value) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
         // console.log(data)

@@ -27,6 +27,7 @@
   "dependencies": {
     "@dimfeld/svelte-lazyload": "^0.0.4",
     "sirv-cli": "^2.0.0",
+    "svelte-lazy-image": "^0.5.1",
     "svelte-spa-router": "^3.3.0"
   }
 }
