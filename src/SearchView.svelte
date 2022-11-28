@@ -27,6 +27,7 @@
         words = words
         modifySearchHint()
         searchButton = '검색'
+        doFetch();  
       }
       searcher = ''
     }
@@ -38,11 +39,26 @@
   }
 
   onMount(async () => {
-    fetch('http://127.0.0.1:5921/'+$radioValue.value) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+    fetch('http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=') // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
         // console.log(data)
         apiData.set(data)
+        console.log($places)
+      })
+      .catch((error) => {
+        console.log(error)
+        return []
+      })
+  })
+
+  let doFetch = (async () => {
+    fetch('http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search='+words[0]) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data)
+        apiData.set(data)
+        console.log($places)
       })
       .catch((error) => {
         console.log(error)

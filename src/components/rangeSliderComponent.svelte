@@ -2,6 +2,12 @@
     import RangeSlider from "svelte-range-slider-pips";
     import { minvlu } from "../store.js";
     import { maxvlu } from "../store.js";
+    const num = new Intl.NumberFormat("en-US");
+    let formatte = (v) => {
+        if (v===20000) return "20,000+";
+        else return num.format(v);
+
+    }
 </script>
 
 <div class="slider">
@@ -16,6 +22,9 @@
         values={[$minvlu, $maxvlu]}
         all="label"
         pips="true"
+        formatter = {(v) => formatte(v)}
+
+        
         on:change={(e) => ($minvlu = e.detail.values[0])}
         on:change={(e) => ($maxvlu = e.detail.values[1])}
     />

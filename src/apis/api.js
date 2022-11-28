@@ -7,8 +7,8 @@ export const placeLink = writable([]);
 
 
 export const places = derived(apiData, ($apidata) => {
-    if ($apidata.food) {
-        return $apidata.food;
+    if ($apidata.menus) {
+        return $apidata.menus;
     }
     else if ($apidata.SeoulNatl){
         return $apidata.SeoulNatl;

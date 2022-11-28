@@ -217,3 +217,7 @@ img{
 .listOfPlace::-webkit-scrollbar-track {
     background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
+
+.slider .rangeHandle .rangeNub{
+    border: 3px solid rgb(246, 252, 255);
+}

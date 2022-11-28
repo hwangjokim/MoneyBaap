@@ -14,7 +14,7 @@
 			label: "서울대학교",
 		},
 		{
-			value: "contacts",
+			value: "ssu",
 			label: "숭실대학교",
 		},
 		{
