@@ -30,6 +30,7 @@
   };
 
   let addWord = () => {
+    promise=[];
     if (words.length < 5) {
       if (searcher.trim() !== "") {
         words.push(searcher);
@@ -50,8 +51,30 @@
 
   
 
-    let doReset = async() => {
-      fetch(
+    let doReset = () => {
+     result=backup;
+     promise="";
+    }
+
+  let doFetch =  () => {
+    fetch(
+      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="+words[0]
+    ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+      .then((response) => response.json())
+      .then((data) => {
+        result=[];
+        apiData.set(data);
+        for (let i = 0; i < $places.length; i += 30)
+        result.push($places.slice(i, i + 30));
+      })
+      .catch((error) => {
+        console.log(error);
+        return [];
+      });
+  };
+  let backup=[];
+
+  let promise =  fetch(
     "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
   ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
     .then((response) => response.json())
@@ -59,31 +82,12 @@
       // console.log(data)
       result=[]
       apiData.set(data);
-      for (let i = 0; i < $places.length; i += 100)
-        result.push($places.slice(i, i + 100));
+      for (let i = 0; i < $places.length; i += 30)
+        result.push($places.slice(i, i + 30));
+      backup=result;
     });
-    }
 
-  let doFetch = async () => {
-    console.log(words[0]);
-    fetch(
-      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="+words[0]
-    ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data)
-        apiData.set(data);
-        result=[];
-        for (let i = 0; i < $places.length; i += 100)
-        result.push($places.slice(i, i + 100));
-      })
-      .catch((error) => {
-        console.log(error);
-        return [];
-      });
-  };
-
-  let promise = doReset();
+    
   let gridCount = () => {};
 
 </script>
