@@ -126,15 +126,13 @@
 
             {#each $places as place}
                 <LazyLoad>
-
-              {#each place.menus as menu_list}
                 <!-- <div class="container"> -->
                 <a href={place.link} target="_blank" rel="noreferrer">
                 <div class="box" >
                   <slot>
                     <div class="pic">
-                      {#if menu_list[2] !== null}
-                        <img data-src={menu_list[2]} use:lazyImage />
+                      {#if place.imgUrl !== null}
+                        <img data-src={place.imgUrl} use:lazyImage />
                       {:else}
                         <img data-src={alt} use:lazyImage/>
                       {/if}
@@ -143,9 +141,9 @@
                     </div>
                     <div class="menuInfo">
                       <slot>
-                        <div class=m_name style="font-weight:bold">{menu_list[0]} </div>
-                        <ds>{menu_list[1]} </ds>
-                        <dt>{place.name}   |   ★ : {place.star}</dt>
+                        <div class=m_name style="font-weight:bold">{place.name} </div>
+                        <ds>{place.price}원 </ds>
+                        <dt>{place.placeName}   |   ★ : {place.star}</dt>
                       </slot>
                     </div>
                   </slot>
@@ -153,7 +151,7 @@
                 <!-- </div> -->
                 </a>
                 
-              {/each}
+              
               </LazyLoad>
             {/each}
           </dl>
