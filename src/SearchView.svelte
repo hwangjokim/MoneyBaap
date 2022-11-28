@@ -44,20 +44,11 @@
 
   let onHandleDelete = (text) => {
     words = words.filter((element) => element !== text);
-    promise=doReset()
+    promise=doReset();
     modifySearchHint();
   };
 
-  let promise = fetch(
-    "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
-  ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log(data)
-      apiData.set(data);
-      for (let i = 0; i < $places.length; i += 100)
-        result.push($places.slice(i, i + 100));
-    });
+  
 
     let doReset = async() => {
       fetch(
@@ -74,15 +65,17 @@
     }
 
   let doFetch = async () => {
+    console.log(words[0]);
     fetch(
-      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
-        words[0]
+      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="+words[0]
     ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
         // console.log(data)
         apiData.set(data);
-        result=$places;
+        result=[];
+        for (let i = 0; i < $places.length; i += 100)
+        result.push($places.slice(i, i + 100));
       })
       .catch((error) => {
         console.log(error);
@@ -90,6 +83,7 @@
       });
   };
 
+  let promise = doReset();
   let gridCount = () => {};
 
 </script>
@@ -154,9 +148,9 @@
                       <slot>
                         <div class="pic">
                           {#if place.imgUrl !== null}
-                            <img data-src={place.imgUrl} use:lazyImage />
+                            <img src={place.imgUrl} />
                           {:else}
-                            <img data-src={alt} use:lazyImage />
+                            <img src={alt} />
                           {/if}
                         </div>
                         <div class="menuInfo">
