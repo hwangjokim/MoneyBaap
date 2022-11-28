@@ -15,6 +15,7 @@
   let words = [];
   let searcher = "";
   let searchButton = "검색";
+  let result = [];
   const alt = "noimg.png";
 
   let onKeyDown = (e) => {
@@ -22,7 +23,7 @@
       case 13:
         addWord();
     }
-  }
+  };
 
   let modifySearchHint = () => {
     searchHint = "남은 메뉴 키워드 : " + (5 - words.length) + "/5";
@@ -45,22 +46,33 @@
     modifySearchHint();
   };
 
-  onMount(async () => {
-    fetch(
-      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
-    ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data)
-        apiData.set(data);
-        $places = $places;
-        console.log($places);
-      })
-      .catch((error) => {
-        console.log(error);
-        return [];
-      });
-  });
+  const promise = fetch(
+    "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
+  ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data)
+      apiData.set(data);
+      for (let i = 0; i < $places.length; i += 300)
+        result.push($places.slice(i, i + 300));
+    });
+
+  // onMount(async () => {
+  //   fetch(
+  //     "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
+  //   ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       // console.log(data)
+  //       apiData.set(data);
+  //       for(let i=0; i<$places.length; i+=100) result.push($places.slice(i, i+100));
+  //       console.log(result)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       return [];
+  //     });
+  // });
 
   let doFetch = async () => {
     fetch(
@@ -71,8 +83,6 @@
       .then((data) => {
         // console.log(data)
         apiData.set(data);
-        $places = $places;
-        console.log($places);
       })
       .catch((error) => {
         console.log(error);
@@ -133,44 +143,46 @@
                         {#each place.menus as menu_list}
                             <dd>{menu_list[0]}, {menu_list[1]}</dd>
                             <!-- <img src={menu_list[2]}  alt="img"> -->
-
-          {#each $places as place}
+          {#await promise then data}
+          {#each result as placer}
             <LazyLoad>
-              <!-- <div class="container"> -->
-              <a href={place.link} target="_blank" rel="noreferrer">
-                <div class="box">
-                  <slot>
-                    <div class="pic">
-                      {#if place.imgUrl !== null}
-                        <img data-src={place.imgUrl} use:lazyImage />
-                      {:else}
-                        <img data-src={alt} use:lazyImage />
-                      {/if}
-                    </div>
-                    <div class="menuInfo">
-                      <slot>
-                        <div class="m_name" style="font-weight:bold">
-                          {place.name}
-                        </div>
-                        <ds>{place.price}원 </ds>
-                        <dt>{place.placeName} | ★ : {place.star}</dt>
-                      </slot>
-                    </div>
-                  </slot>
-                </div>
-                <!-- </div> -->
-              </a>
+              {#each placer as place}
+                <!-- <div class="container"> -->
+                <a href={place.link} target="_blank" rel="noreferrer">
+                  <div class="box">
+                    <slot>
+                      <div class="pic">
+                        {#if place.imgUrl !== null}
+                          <img data-src={place.imgUrl} use:lazyImage />
+                        {:else}
+                          <img data-src={alt} use:lazyImage />
+                        {/if}
+                      </div>
+                      <div class="menuInfo">
+                        <slot>
+                          <div class="m_name" style="font-weight:bold">
+                            {place.name}
+                          </div>
+                          <ds>{place.price}원 </ds>
+                          <dt>{place.placeName} | ★ : {place.star}</dt>
+                        </slot>
+                      </div>
+                    </slot>
+                  </div>
+                  <!-- </div> -->
+                </a>
+              {/each}
             </LazyLoad>
           {/each}
+          {/await}
         </dl>
       </div>
     </div>
   </div>
 </section>
 
+<svelte:window on:keydown|prevent_default={onKeyDown} />
 
 <style lang="scss">
   @import "scss/SearchViewCss.scss";
 </style>
-
-<svelte:window on:keydown|prevent_default={onKeyDown} />
