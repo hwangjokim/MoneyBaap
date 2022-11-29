@@ -49,8 +49,6 @@
     modifySearchHint();
   };
 
-  
-
     let doReset = () => {
      result=backup;
      promise="";
@@ -137,16 +135,10 @@
 
       <div class="listOfPlace">
         <dl>
-          <!-- {#each $places as place}
-                <dt>{place.name}  ★ : {place.star} | {place.locate}</dt>
-                        {#each place.menus as menu_list}
-                            <dd>{menu_list[0]}, {menu_list[1]}</dd>
-                            <!-- <img src={menu_list[2]}  alt="img"> -->
           {#await promise then data}
             {#each result as placer}
               <LazyLoad>
                 {#each placer as place}
-                  <!-- <div class="container"> -->
                   <a href={place.link} target="_blank" rel="noreferrer">
                     <div class="box">
                       <slot>
@@ -163,12 +155,15 @@
                               {place.name}
                             </div>
                             <ds>{place.price}원 </ds>
-                            <dt>{place.placeName} | ★ : {place.star}</dt>
+                            {#if place.star != null}
+                            <dt>{place.placeName} |  * : {place.star}</dt>
+                            {:else}
+                            <dt>{place.placeName} </dt>
+                            {/if}
                           </slot>
                         </div>
                       </slot>
                     </div>
-                    <!-- </div> -->
                   </a>
                 {/each}
               </LazyLoad>
