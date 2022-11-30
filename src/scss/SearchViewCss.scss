@@ -1,9 +1,15 @@
 @import 'bulma/sass/utilities/mixins';
 
 @font-face {
-    font-family : '고딕';
-    src : url("/hanna.ttf")
+    font-family: 'BMHANNAAir';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    unicode-range: U+0200-2604,U+2606-D7A3; 
+    // 별표만 제외시킴 ( ★ -> U+2605 )
 }
+
+
 
 section{
     height: 100%;
@@ -86,7 +92,7 @@ section{
 }
 
 .wordlist{
-    font-family: '고딕';
+    font-family: 'BMHANNAAir';
     @include widescreen{
         padding:1em;
     }
@@ -102,7 +108,7 @@ section{
 }
 
 .is-radio{
-    font-family: '고딕';
+    font-family: 'BMHANNAAir';
     @include widescreen{
         align-content: center;
         margin: 0.5em 1em 0em 15em;
@@ -122,7 +128,7 @@ section{
 }
 
 .listOfPlace{
-    font-family: '고딕';
+    font-family: 'BMHANNAAir';
     overflow-x:hidden;
     overflow-y:scroll;
     margin-top: 2em;

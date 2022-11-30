@@ -16,6 +16,7 @@
   let searcher = "";
   let searchButton = "검색";
   let result = [];
+  let isCheck = true;
   const alt = "noimg.png";
 
   let onKeyDown = (e) => {
@@ -30,64 +31,63 @@
   };
 
   let addWord = () => {
-    promise=[];
+    promise = [];
     if (words.length < 5) {
       if (searcher.trim() !== "") {
         words.push(searcher);
         words = words;
         modifySearchHint();
         searchButton = "검색";
-        promise= doFetch(); 
+        promise = doFetch();
       }
       searcher = "";
     }
-  }
+  };
 
   let onHandleDelete = (text) => {
     words = words.filter((element) => element !== text);
-    promise=doReset();
+    promise = doReset();
     modifySearchHint();
   };
 
-    let doReset = () => {
-     result=backup;
-     promise="";
-    }
+  let doReset = () => {
+    result = backup;
+    promise = "";
+  };
 
-  let doFetch =  () => {
+  let doFetch = () => {
     fetch(
-      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="+words[0]
+      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
+        words[0]
     ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
-        result=[];
+        result = [];
         apiData.set(data);
-        for (let i = 0; i < $places.length; i += 30)
-        result.push($places.slice(i, i + 30));
+        for (let i = 0; i < $places.length; i += 10)
+          result.push($places.slice(i, i + 10));
       })
       .catch((error) => {
         console.log(error);
         return [];
       });
   };
-  let backup=[];
+  let backup = [];
 
-  let promise =  fetch(
+  let promise = fetch(
     "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
   ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
     .then((response) => response.json())
     .then((data) => {
       // console.log(data)
-      result=[]
+      result = [];
       apiData.set(data);
-      for (let i = 0; i < $places.length; i += 30)
-        result.push($places.slice(i, i + 30));
-      backup=result;
+      for (let i = 0; i < $places.length; i +=10)
+        result.push($places.slice(i, i + 10));
+      backup = result;
     });
 
-    
   let gridCount = () => {};
-
 </script>
 
 <section class="hero" style="width: auto;">
@@ -131,6 +131,11 @@
           <input type="radio" name="foobar" />
           최고가순
         </label>
+
+        <label class="checkbox" style="margin-left: 0.5em;">
+          <input type="checkbox" bind:checked={isCheck}/>
+          0원 표시하기
+        </label>
       </div>
 
       <div class="listOfPlace">
@@ -139,6 +144,7 @@
             {#each result as placer}
               <LazyLoad>
                 {#each placer as place}
+                {#if isCheck}
                   <a href={place.link} target="_blank" rel="noreferrer">
                     <div class="box">
                       <slot>
@@ -156,15 +162,43 @@
                             </div>
                             <ds>{place.price}원 </ds>
                             {#if place.star != null}
-                            <dt>{place.placeName} |  * : {place.star}</dt>
+                              <dt>{place.placeName} | ★ : {place.star}</dt>
                             {:else}
-                            <dt>{place.placeName} </dt>
+                              <dt>{place.placeName}</dt>
                             {/if}
                           </slot>
                         </div>
                       </slot>
                     </div>
                   </a>
+                  {:else if !isCheck && place.price!=0}
+                  <a href={place.link} target="_blank" rel="noreferrer">
+                    <div class="box">
+                      <slot>
+                        <div class="pic">
+                          {#if place.imgUrl !== null}
+                            <img src={place.imgUrl} />
+                          {:else}
+                            <img src={alt} />
+                          {/if}
+                        </div>
+                        <div class="menuInfo">
+                          <slot>
+                            <div class="m_name" style="font-weight:bold">
+                              {place.name}
+                            </div>
+                            <ds>{place.price}원 </ds>
+                            {#if place.star != null}
+                              <dt>{place.placeName} | ★ : {place.star}</dt>
+                            {:else}
+                              <dt>{place.placeName}</dt>
+                            {/if}
+                          </slot>
+                        </div>
+                      </slot>
+                    </div>
+                  </a>
+                  {/if}
                 {/each}
               </LazyLoad>
             {/each}
