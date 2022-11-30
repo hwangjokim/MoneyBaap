@@ -2,14 +2,11 @@
   import Navbar from "./components/Navbar.svelte";
   import RangeSlider from "./components/rangeSliderComponent.svelte";
   import WordList from "./components/WordList.svelte";
-  import { onMount } from "svelte";
   import { apiData, places } from "./apis/api.js";
   import { minvlu } from "./store.js";
   import { maxvlu } from "./store.js";
-  import { radioValue } from "./store.js";
-  import { useLazyImage as lazyImage } from "svelte-lazy-image";
   import LazyLoad from "@dimfeld/svelte-lazyload";
-
+// 지금 되는거 : 가격 범위 보여주기, 검색 "한개까지" , 지우는거 안됨 
   export const title = "Search View";
   let searchHint = "남은 메뉴 키워드 : 5/5";
   let words = [];
@@ -46,13 +43,13 @@
 
   let onHandleDelete = (text) => {
     words = words.filter((element) => element !== text);
-    promise = doReset();
+    doReset();
     modifySearchHint();
   };
 
   let doReset = () => {
-    result = backup;
-    promise = "";
+    backup=[];
+    promise=doFetch();
   };
 
   let doFetch = () => {
@@ -64,8 +61,16 @@
       .then((data) => {
         result = [];
         apiData.set(data);
-        for (let i = 0; i < $places.length; i += 10)
-          result.push($places.slice(i, i + 10));
+        backup.push(...$places);
+        
+        backup.sort(function (first, second) {
+          return first.price - second.price;
+        });
+        backup = backup.filter((place) => (parseInt(place.price)  >= $minvlu && parseInt(place.price) <= $maxvlu));
+        console.log(backup);
+
+        for (let i = 0; i < backup.length; i += 10)
+          result.push(backup.slice(i, i + 10));
       })
       .catch((error) => {
         console.log(error);
@@ -82,9 +87,11 @@
       // console.log(data)
       result = [];
       apiData.set(data);
-      for (let i = 0; i < $places.length; i +=10)
-        result.push($places.slice(i, i + 10));
-      backup = result;
+      backup.push(...$places);
+      backup = backup.filter((place) => (parseInt(place.price)  >= $minvlu && parseInt(place.price) <= $maxvlu));
+      for (let i = 0; i < backup.length; i += 10)
+        result.push(backup.slice(i, i + 10));
+      backup=[];
     });
 
   let gridCount = () => {};
@@ -133,7 +140,7 @@
         </label>
 
         <label class="checkbox" style="margin-left: 0.5em;">
-          <input type="checkbox" bind:checked={isCheck}/>
+          <input type="checkbox" bind:checked={isCheck} />
           0원 표시하기
         </label>
       </div>
@@ -144,60 +151,60 @@
             {#each result as placer}
               <LazyLoad>
                 {#each placer as place}
-                {#if isCheck}
-                  <a href={place.link} target="_blank" rel="noreferrer">
-                    <div class="box">
-                      <slot>
-                        <div class="pic">
-                          {#if place.imgUrl !== null}
-                            <img src={place.imgUrl} />
-                          {:else}
-                            <img src={alt} />
-                          {/if}
-                        </div>
-                        <div class="menuInfo">
-                          <slot>
-                            <div class="m_name" style="font-weight:bold">
-                              {place.name}
-                            </div>
-                            <ds>{place.price}원 </ds>
-                            {#if place.star != null}
-                              <dt>{place.placeName} | ★ : {place.star}</dt>
+                  {#if isCheck}
+                    <a href={place.link} target="_blank" rel="noreferrer">
+                      <div class="box">
+                        <slot>
+                          <div class="pic">
+                            {#if place.imgUrl !== null}
+                              <img src={place.imgUrl} />
                             {:else}
-                              <dt>{place.placeName}</dt>
+                              <img src={alt} />
                             {/if}
-                          </slot>
-                        </div>
-                      </slot>
-                    </div>
-                  </a>
-                  {:else if !isCheck && place.price!=0}
-                  <a href={place.link} target="_blank" rel="noreferrer">
-                    <div class="box">
-                      <slot>
-                        <div class="pic">
-                          {#if place.imgUrl !== null}
-                            <img src={place.imgUrl} />
-                          {:else}
-                            <img src={alt} />
-                          {/if}
-                        </div>
-                        <div class="menuInfo">
-                          <slot>
-                            <div class="m_name" style="font-weight:bold">
-                              {place.name}
-                            </div>
-                            <ds>{place.price}원 </ds>
-                            {#if place.star != null}
-                              <dt>{place.placeName} | ★ : {place.star}</dt>
+                          </div>
+                          <div class="menuInfo">
+                            <slot>
+                              <div class="m_name" style="font-weight:bold">
+                                {place.name}
+                              </div>
+                              <ds>{place.price}원 </ds>
+                              {#if place.star != null}
+                                <dt>{place.placeName} | ★ : {place.star}</dt>
+                              {:else}
+                                <dt>{place.placeName}</dt>
+                              {/if}
+                            </slot>
+                          </div>
+                        </slot>
+                      </div>
+                    </a>
+                  {:else if !isCheck && place.price != 0}
+                    <a href={place.link} target="_blank" rel="noreferrer">
+                      <div class="box">
+                        <slot>
+                          <div class="pic">
+                            {#if place.imgUrl !== null}
+                              <img src={place.imgUrl} />
                             {:else}
-                              <dt>{place.placeName}</dt>
+                              <img src={alt} />
                             {/if}
-                          </slot>
-                        </div>
-                      </slot>
-                    </div>
-                  </a>
+                          </div>
+                          <div class="menuInfo">
+                            <slot>
+                              <div class="m_name" style="font-weight:bold">
+                                {place.name}
+                              </div>
+                              <ds>{place.price}원 </ds>
+                              {#if place.star != null}
+                                <dt>{place.placeName} | ★ : {place.star}</dt>
+                              {:else}
+                                <dt>{place.placeName}</dt>
+                              {/if}
+                            </slot>
+                          </div>
+                        </slot>
+                      </div>
+                    </a>
                   {/if}
                 {/each}
               </LazyLoad>
