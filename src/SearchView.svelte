@@ -10,7 +10,8 @@
   //스크롤 해걀 ㄱㄱ
   //최고가순으로 정렬하기 : X
   //버튼 눌렀을 때 갱신시키기 : O
-  export const title = "Search View";
+  export const title = "안숭맛춤";
+
   let searchHint = "남은 메뉴 키워드 : 5/5";
   let words = [];
   let searcher = "";
@@ -186,6 +187,10 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
 
   let gridCount = () => {};
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 
 <section class="hero" style="width: auto;">
   <div class="hero-head">
