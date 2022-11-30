@@ -134,22 +134,24 @@ section{
     margin-top: 2em;
 
 
-    @include until(2000px){
+    @include from(1700px){
         width: auto;
         align-content: center;
         
         padding: 0em 0em 0.2em 15em;
         margin-right: 8em;
         max-height:43em;
-    }
+    };
 
 
-    @include until(1700px){
+    @include from(1216px)  {
+        @include until(1700px){
         width: auto;
         align-content: center;
         padding: 0em 0em 0.2em 15em;
         margin-right: 12em;
         max-height:25.8em;
+        }
     }
     @include desktop-only{
         width: auto;
