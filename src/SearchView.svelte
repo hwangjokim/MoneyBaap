@@ -6,7 +6,8 @@
   import { minvlu } from "./store.js";
   import { maxvlu } from "./store.js";
   import LazyLoad from "@dimfeld/svelte-lazyload";
-// 지금 되는거 : 가격 범위 보여주기, 검색 "한개까지" , 지우는거 안됨 
+  //Todo 20000원인거 초과로 ㄱ
+  //스크롤 해걀 ㄱㄱ
   export const title = "Search View";
   let searchHint = "남은 메뉴 키워드 : 5/5";
   let words = [];
@@ -15,7 +16,7 @@
   let result = [];
   let isCheck = true;
   const alt = "noimg.png";
-
+  //promise가 갱신될 때 마다 (어떻게든 ) 새롭게 서버에서 쿼리보내서 가져오는 느낌 
   let onKeyDown = (e) => {
     switch (e.keyCode) {
       case 13:
@@ -43,56 +44,113 @@
 
   let onHandleDelete = (text) => {
     words = words.filter((element) => element !== text);
-    doReset();
+    promise = doReset(); // promise에 대입해서 갱신을 알림
     modifySearchHint();
   };
+/* 
+doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수 
 
+*/
   let doReset = () => {
-    backup=[];
-    promise=doFetch();
+    backup = [];
+    if (words.length == 0) defaultSearch(); // 키워드를 모두 지웠다면, 모든 메뉴 검색 
+    else {
+      for (let k = 0; k < words.length; k++) { //키워드가 남아있다면, 순회하며 검색함
+        fetch(
+          "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
+            words[k]
+        ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+          .then((response) => response.json())
+          .then((data) => {
+            result = []; // result는 10개식 짤라서 ㄹㅇㄹㅇㄹㅇ 보여줄 배열
+            apiData.set(data); 
+            backup.push(...$places); //백업은  result의 자르기 전 버전 
+
+            backup.sort(function (first, second) { // 백업 배열에서, 가격을 낮은 순서로 정렬해줌
+              return first.price - second.price;
+            });
+            backup = backup.filter( //중복 제거 (메뉴 이름과 가게이름 같을경우 컷)
+              (value, index, self) =>
+                index ===
+                self.findIndex(
+                  (t) =>
+                    t.placeName === value.placeName && t.name === value.name
+                )
+            );
+            tempForView = backup.filter( //tempForView = 백업 배열에서, 가격 범위가 지정된 배열. 얘가 result에 10개단위로 썰려서 들어감
+              (place) =>
+                parseInt(place.price) >= $minvlu &&
+                parseInt(place.price) <= $maxvlu
+            );
+            for (let i = 0; i < tempForView.length; i += 10) //result에 10개씩 잘라서 담아줌
+              result.push(tempForView.slice(i, i + 10));
+          })
+          .catch((error) => {
+            console.log(error);
+            return [];
+          });
+      }
+    }
   };
 
+  //doFetch = 키워드 추가할때 ㅍ호출
   let doFetch = () => {
     fetch(
       "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
-        words[0]
+        words[words.length - 1] //words의 맨 마지막 원소로 검색
     ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
         result = [];
         apiData.set(data);
-        backup.push(...$places);
-        
+        backup.push(...$places); 
+
         backup.sort(function (first, second) {
           return first.price - second.price;
         });
-        backup = backup.filter((place) => (parseInt(place.price)  >= $minvlu && parseInt(place.price) <= $maxvlu));
-        console.log(backup);
-
-        for (let i = 0; i < backup.length; i += 10)
-          result.push(backup.slice(i, i + 10));
+        backup = backup.filter(
+          (value, index, self) =>
+            index ===
+            self.findIndex(
+              (t) => t.placeName === value.placeName && t.name === value.name
+            )
+        );
+        tempForView = backup.filter(
+          (place) =>
+            parseInt(place.price) >= $minvlu && parseInt(place.price) <= $maxvlu
+        );
+        for (let i = 0; i < tempForView.length; i += 10)
+          result.push(tempForView.slice(i, i + 10));
       })
       .catch((error) => {
         console.log(error);
         return [];
       });
   };
-  let backup = [];
+  let defaultSearch = () => {
+    fetch(
+      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
+    ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log(data)
+        result = [];
+        apiData.set(data);
+        backup.push(...$places);
+        backup = backup.filter(
+          (place) =>
+            parseInt(place.price) >= $minvlu && parseInt(place.price) <= $maxvlu
+        );
+        for (let i = 0; i < backup.length; i += 10)
+          result.push(backup.slice(i, i + 10));
+        backup = [];
+      });
+  };
 
-  let promise = fetch(
-    "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
-  ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log(data)
-      result = [];
-      apiData.set(data);
-      backup.push(...$places);
-      backup = backup.filter((place) => (parseInt(place.price)  >= $minvlu && parseInt(place.price) <= $maxvlu));
-      for (let i = 0; i < backup.length; i += 10)
-        result.push(backup.slice(i, i + 10));
-      backup=[];
-    });
+  let backup = [];
+  let tempForView = [];
+
+  let promise = defaultSearch();
 
   let gridCount = () => {};
 </script>
