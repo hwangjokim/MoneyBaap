@@ -8,6 +8,8 @@
   import LazyLoad from "@dimfeld/svelte-lazyload";
   //Todo 20000원인거 초과로 ㄱ
   //스크롤 해걀 ㄱㄱ
+  //최고가순으로 정렬하기 : X
+  //버튼 눌렀을 때 갱신시키기 : O
   export const title = "Search View";
   let searchHint = "남은 메뉴 키워드 : 5/5";
   let words = [];
@@ -15,8 +17,9 @@
   let searchButton = "검색";
   let result = [];
   let isCheck = true;
+  let orderFlag = 0;
   const alt = "noimg.png";
-  //promise가 갱신될 때 마다 (어떻게든 ) 새롭게 서버에서 쿼리보내서 가져오는 느낌 
+  //promise가 갱신될 때 마다 (어떻게든) 새롭게 서버에서 쿼리보내서 가져오는 느낌 
   let onKeyDown = (e) => {
     switch (e.keyCode) {
       case 13:
@@ -27,7 +30,7 @@
   let modifySearchHint = () => {
     searchHint = "남은 메뉴 키워드 : " + (5 - words.length) + "/5";
   };
-
+// promise가 새로운 갱신의 역할
   let addWord = () => {
     promise = [];
     if (words.length < 5) {
@@ -38,6 +41,9 @@
         searchButton = "검색";
         promise = doFetch();
       }
+      else{
+        promise = doReset();
+      }
       searcher = "";
     }
   };
@@ -47,11 +53,23 @@
     promise = doReset(); // promise에 대입해서 갱신을 알림
     modifySearchHint();
   };
+
+  // 최저가순:0, 최고가순:1 정렬 바꾸기
+  let onChangeOrder = () =>{
+    console.log(orderFlag)
+    if (orderFlag == 1){
+      orderFlag = 0;
+    }
+    else if(orderFlag == 0){
+      orderFlag = 1;
+    }
+    promise=doReset();
+  }
 /* 
 doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수 
-
 */
   let doReset = () => {
+    
     backup = [];
     if (words.length == 0) defaultSearch(); // 키워드를 모두 지웠다면, 모든 메뉴 검색 
     else {
@@ -77,6 +95,11 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                     t.placeName === value.placeName && t.name === value.name
                 )
             );
+            
+            if(orderFlag==1)
+              backup.reverse();
+
+              console.log({orderFlag})
             tempForView = backup.filter( //tempForView = 백업 배열에서, 가격 범위가 지정된 배열. 얘가 result에 10개단위로 썰려서 들어감
               (place) =>
                 parseInt(place.price) >= $minvlu &&
@@ -93,7 +116,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
     }
   };
 
-  //doFetch = 키워드 추가할때 ㅍ호출
+  //doFetch = 키워드 추가할때 호출
   let doFetch = () => {
     fetch(
       "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
@@ -103,8 +126,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
       .then((data) => {
         result = [];
         apiData.set(data);
-        backup.push(...$places); 
-
+        backup.push(...$places);
         backup.sort(function (first, second) {
           return first.price - second.price;
         });
@@ -115,6 +137,12 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
               (t) => t.placeName === value.placeName && t.name === value.name
             )
         );
+
+        //orderFlag가 1이면, 최고가순 정렬 
+        if(orderFlag==1)
+            backup.reverse();
+          console.log({orderFlag})
+
         tempForView = backup.filter(
           (place) =>
             parseInt(place.price) >= $minvlu && parseInt(place.price) <= $maxvlu
@@ -141,7 +169,11 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
           (place) =>
             parseInt(place.price) >= $minvlu && parseInt(place.price) <= $maxvlu
         );
-        for (let i = 0; i < backup.length; i += 10)
+
+        if(orderFlag==1)
+          backup.reverse();
+        
+          for (let i = 0; i < backup.length; i += 10)
           result.push(backup.slice(i, i + 10));
         backup = [];
       });
@@ -189,17 +221,17 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
       </div>
       <div class="control is-radio">
         <label class="radio">
-          <input type="radio" name="foobar" checked />
+          <input type="radio" name="foobar" checked on:change={onChangeOrder}/>
           최저가순
         </label>
         <label class="radio">
-          <input type="radio" name="foobar" />
+          <input type="radio" name="foobar" on:change={onChangeOrder}/>
           최고가순
         </label>
 
         <label class="checkbox" style="margin-left: 0.5em;">
           <input type="checkbox" bind:checked={isCheck} />
-          0원 표시하기
+          0원 표시하기!
         </label>
       </div>
 
