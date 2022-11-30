@@ -179,10 +179,11 @@ section{
 }
 
 .box{
+    float: left;
     align-content:vertical;
-    float:left;
     border: 1px solid #aaa;
     width:46.5%;
+    min-height: 33%;
     max-height:33%;
     border-radius: 7px;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
@@ -200,7 +201,7 @@ img{
     width:85px;
 }
 .pic{
-    float:left;
+    float: left;
     margin-right:1em;
 }
 

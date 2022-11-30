@@ -8,7 +8,7 @@
   import { maxvlu } from "./store.js";
   import { radioValue } from "./store.js";
   import { useLazyImage as lazyImage } from "svelte-lazy-image";
-  import LazyLoad from "@dimfeld/svelte-lazyload";
+  import { LazyLoadContainer, LazyLoad } from "svelte-lazyload";
 
   export const title = "Search View";
   let searchHint = "남은 메뉴 키워드 : 5/5";
@@ -64,8 +64,6 @@
       .then((data) => {
         result = [];
         apiData.set(data);
-        for (let i = 0; i < $places.length; i += 10)
-          result.push($places.slice(i, i + 10));
       })
       .catch((error) => {
         console.log(error);
@@ -82,9 +80,7 @@
       // console.log(data)
       result = [];
       apiData.set(data);
-      for (let i = 0; i < $places.length; i +=10)
-        result.push($places.slice(i, i + 10));
-      backup = result;
+      backup = $apiData;
     });
 
   let gridCount = () => {};
@@ -133,20 +129,20 @@
         </label>
 
         <label class="checkbox" style="margin-left: 0.5em;">
-          <input type="checkbox" bind:checked={isCheck}/>
+          <input type="checkbox" bind:checked={isCheck} />
           0원 표시하기
         </label>
       </div>
 
       <div class="listOfPlace">
-        <dl>
-          {#await promise then data}
-            {#each result as placer}
-              <LazyLoad>
-                {#each placer as place}
-                {#if isCheck}
+        {#await promise then data}
+          {#if isCheck}
+            <LazyLoadContainer>
+              {#each $places as place, i}
+                <LazyLoad id={i}>
+                  <div>
                   <a href={place.link} target="_blank" rel="noreferrer">
-                    <div class="box">
+                    <div class="box" >
                       <slot>
                         <div class="pic">
                           {#if place.imgUrl !== null}
@@ -171,39 +167,12 @@
                       </slot>
                     </div>
                   </a>
-                  {:else if !isCheck && place.price!=0}
-                  <a href={place.link} target="_blank" rel="noreferrer">
-                    <div class="box">
-                      <slot>
-                        <div class="pic">
-                          {#if place.imgUrl !== null}
-                            <img src={place.imgUrl} />
-                          {:else}
-                            <img src={alt} />
-                          {/if}
-                        </div>
-                        <div class="menuInfo">
-                          <slot>
-                            <div class="m_name" style="font-weight:bold">
-                              {place.name}
-                            </div>
-                            <ds>{place.price}원 </ds>
-                            {#if place.star != null}
-                              <dt>{place.placeName} | ★ : {place.star}</dt>
-                            {:else}
-                              <dt>{place.placeName}</dt>
-                            {/if}
-                          </slot>
-                        </div>
-                      </slot>
-                    </div>
-                  </a>
-                  {/if}
-                {/each}
-              </LazyLoad>
-            {/each}
-          {/await}
-        </dl>
+                </div>
+                </LazyLoad>
+              {/each}
+            </LazyLoadContainer>
+          {/if}
+        {/await}
       </div>
     </div>
   </div>
