@@ -1,9 +1,15 @@
 <!-- component/Navbar.svelte -->
+<script>
+
+import {replace } from 'svelte-spa-router'
+</script>
+
 <header class="navbar is-fixed-top">
 <div class="container">
     <div class="navbar-brand">
-    <div class="navbar-item">
-        <img src="/logo.png" alt="Logo" />
+    <div class="navbar-item" >
+        <button style="border: 0; cursor:pointer; background-color:rgba( 255, 255, 255, 0 );" on:click={() => replace("/")}><img src="/logo.png" alt="Logo"/></button>
+        
     </div>
     </div>
     <div class="navbar-menu">
