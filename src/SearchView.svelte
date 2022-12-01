@@ -266,8 +266,9 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               
                                 <dt>{place.placeName} </dt>
                                 {#if place.star != null}
-                                <ds>★ : {place.star}</ds>
-                                
+                                <dd>★ : {place.star}</dd>
+                                {:else}
+                                <de>△</de>
                                 {/if}
                             </slot>
                           </div>
