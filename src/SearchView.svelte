@@ -45,6 +45,7 @@
       else{
         promise = doReset();
       }
+      document.getElementById("lists").scrollTop = 0;
       searcher = "";
     }
   };
@@ -240,7 +241,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
         </label>
       </div>
 
-      <div class="listOfPlace">
+      <div class="listOfPlace" id="lists" >
         <dl>
           {#await promise then data}
             {#each result as placer}
