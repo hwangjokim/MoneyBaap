@@ -66,6 +66,7 @@
       orderFlag = 1;
     }
     promise=doReset();
+    document.getElementById("lists").scrollTop = 0;
   }
 /* 
 doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수 
@@ -249,6 +250,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                 {#each placer as place}
                   {#if isCheck}
                     <a href={place.link} target="_blank" rel="noreferrer">
+                      <!-- svelte-ignore a11y-missing-attribute -->
                       <div class="box">
                         <slot>
                           <div class="pic">
@@ -269,7 +271,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                                 {#if place.star != null}
                                 <dd>★ : {place.star}</dd>
                                 {:else}
-                                <de>△</de>
+                                <de>&nbsp;</de>
                                 {/if}
                             </slot>
                           </div>
@@ -278,6 +280,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                     </a>
                   {:else if !isCheck && place.price != 0}
                     <a href={place.link} target="_blank" rel="noreferrer">
+                      <!-- svelte-ignore a11y-missing-attribute -->
                       <div class="box">
                         <slot>
                           <div class="pic">
