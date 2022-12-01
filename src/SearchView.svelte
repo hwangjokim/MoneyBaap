@@ -293,10 +293,10 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               </div>
                               <ds>{place.price}원 </ds>
                               {#if place.star != null}
-                                <dt>{place.placeName} | ★ : {place.star}</dt>
-                              {:else}
-                                <dt>{place.placeName}</dt>
-                              {/if}
+                                <dd>★ : {place.star}</dd>
+                                {:else}
+                                <de>△</de>
+                                {/if}
                             </slot>
                           </div>
                         </slot>
