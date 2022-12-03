@@ -19,8 +19,9 @@
   let result = [];
   let isCheck = true;
   let orderFlag = 0;
+  let maxValueForSearch = $maxvlu;
   const alt = "noimg.png";
-  //promise가 갱신될 때 마다 (어떻게든) 새롭게 서버에서 쿼리보내서 가져오는 느낌 
+  //promise가 갱신될 때 마다 (어떻게든) 새롭게 서버에서 쿼리보내서 가져오는 느낌
   let onKeyDown = (e) => {
     switch (e.keyCode) {
       case 13:
@@ -31,7 +32,7 @@
   let modifySearchHint = () => {
     searchHint = "남은 메뉴 키워드 : " + (5 - words.length) + "/5";
   };
-// promise가 새로운 갱신의 역할
+  // promise가 새로운 갱신의 역할
   let addWord = () => {
     promise = [];
     if (words.length < 5) {
@@ -41,8 +42,7 @@
         modifySearchHint();
         searchButton = "검색";
         promise = doFetch();
-      }
-      else{
+      } else {
         promise = doReset();
       }
       document.getElementById("lists").scrollTop = 0;
@@ -57,26 +57,26 @@
   };
 
   // 최저가순:0, 최고가순:1 정렬 바꾸기
-  let onChangeOrder = () =>{
-    console.log(orderFlag)
-    if (orderFlag == 1){
+  let onChangeOrder = () => {
+    console.log(orderFlag);
+    if (orderFlag == 1) {
       orderFlag = 0;
-    }
-    else if(orderFlag == 0){
+    } else if (orderFlag == 0) {
       orderFlag = 1;
     }
-    promise=doReset();
+    promise = doReset();
     document.getElementById("lists").scrollTop = 0;
-  }
-/* 
+  };
+  /* 
 doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수 
 */
   let doReset = () => {
-    
     backup = [];
-    if (words.length == 0) defaultSearch(); // 키워드를 모두 지웠다면, 모든 메뉴 검색 
+    if (words.length == 0)
+      defaultSearch(); // 키워드를 모두 지웠다면, 모든 메뉴 검색
     else {
-      for (let k = 0; k < words.length; k++) { //키워드가 남아있다면, 순회하며 검색함
+      for (let k = 0; k < words.length; k++) {
+        //키워드가 남아있다면, 순회하며 검색함
         fetch(
           "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
             words[k]
@@ -84,13 +84,15 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
           .then((response) => response.json())
           .then((data) => {
             result = []; // result는 10개식 짤라서 ㄹㅇㄹㅇㄹㅇ 보여줄 배열
-            apiData.set(data); 
-            backup.push(...$places); //백업은  result의 자르기 전 버전 
+            apiData.set(data);
+            backup.push(...$places); //백업은  result의 자르기 전 버전
 
-            backup.sort(function (first, second) { // 백업 배열에서, 가격을 낮은 순서로 정렬해줌
+            backup.sort(function (first, second) {
+              // 백업 배열에서, 가격을 낮은 순서로 정렬해줌
               return first.price - second.price;
             });
-            backup = backup.filter( //중복 제거 (메뉴 이름과 가게이름 같을경우 컷)
+            backup = backup.filter(
+              //중복 제거 (메뉴 이름과 가게이름 같을경우 컷)
               (value, index, self) =>
                 index ===
                 self.findIndex(
@@ -98,17 +100,23 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                     t.placeName === value.placeName && t.name === value.name
                 )
             );
-            
-            if(orderFlag==1)
-              backup.reverse();
 
-              console.log({orderFlag})
-            tempForView = backup.filter( //tempForView = 백업 배열에서, 가격 범위가 지정된 배열. 얘가 result에 10개단위로 썰려서 들어감
+            if (orderFlag == 1) backup.reverse();
+            if ($maxvlu == 20000) maxValueForSearch=1000000;
+            else maxValueForSearch=$maxvlu;
+
+            console.log({ orderFlag });
+            tempForView = backup.filter(
+              //tempForView = 백업 배열에서, 가격 범위가 지정된 배열. 얘가 result에 10개단위로 썰려서 들어감
               (place) =>
                 parseInt(place.price) >= $minvlu &&
-                parseInt(place.price) <= $maxvlu
+                parseInt(place.price) <= maxValueForSearch
             );
-            for (let i = 0; i < tempForView.length; i += 10) //result에 10개씩 잘라서 담아줌
+            for (
+              let i = 0;
+              i < tempForView.length;
+              i += 10 //result에 10개씩 잘라서 담아줌
+            )
               result.push(tempForView.slice(i, i + 10));
           })
           .catch((error) => {
@@ -141,14 +149,16 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
             )
         );
 
-        //orderFlag가 1이면, 최고가순 정렬 
-        if(orderFlag==1)
-            backup.reverse();
-          console.log({orderFlag})
+        //orderFlag가 1이면, 최고가순 정렬
+        if (orderFlag == 1) backup.reverse();
+        console.log({ orderFlag });
+
+        if ($maxvlu == 20000) maxValueForSearch=1000000;
+        else maxValueForSearch=$maxvlu;
 
         tempForView = backup.filter(
           (place) =>
-            parseInt(place.price) >= $minvlu && parseInt(place.price) <= $maxvlu
+            parseInt(place.price) >= $minvlu && parseInt(place.price) <= maxValueForSearch
         );
         for (let i = 0; i < tempForView.length; i += 10)
           result.push(tempForView.slice(i, i + 10));
@@ -166,17 +176,22 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
       .then((data) => {
         // console.log(data)
         result = [];
+        
+        if ($maxvlu == 20000) maxValueForSearch=1000000;
+        else maxValueForSearch=$maxvlu;
+
         apiData.set(data);
         backup.push(...$places);
+
+
         backup = backup.filter(
           (place) =>
-            parseInt(place.price) >= $minvlu && parseInt(place.price) <= $maxvlu
+            parseInt(place.price) >= $minvlu && parseInt(place.price) <= maxValueForSearch
         );
 
-        if(orderFlag==1)
-          backup.reverse();
-        
-          for (let i = 0; i < backup.length; i += 10)
+        if (orderFlag == 1) backup.reverse();
+
+        for (let i = 0; i < backup.length; i += 10)
           result.push(backup.slice(i, i + 10));
         backup = [];
       });
@@ -191,7 +206,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
 </script>
 
 <svelte:head>
-	<title>{title}</title>
+  <title>{title}</title>
 </svelte:head>
 
 <section class="hero" style="width: auto;">
@@ -228,11 +243,11 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
       </div>
       <div class="control is-radio">
         <label class="radio">
-          <input type="radio" name="foobar" checked on:change={onChangeOrder}/>
+          <input type="radio" name="foobar" checked on:change={onChangeOrder} />
           최저가순
         </label>
         <label class="radio">
-          <input type="radio" name="foobar" on:change={onChangeOrder}/>
+          <input type="radio" name="foobar" on:change={onChangeOrder} />
           최고가순
         </label>
 
@@ -242,7 +257,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
         </label>
       </div>
 
-      <div class="listOfPlace" id="lists" >
+      <div class="listOfPlace" id="lists">
         <dl>
           {#await promise then data}
             {#each result as placer}
@@ -266,13 +281,13 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                                 {place.name}
                               </div>
                               <ds>{place.price}원 </ds>
-                              
-                                <dt>{place.placeName} </dt>
-                                {#if place.star != null}
+
+                              <dt>{place.placeName}</dt>
+                              {#if place.star != null}
                                 <dd>★ : {place.star}</dd>
-                                {:else}
+                              {:else}
                                 <de>&nbsp;</de>
-                                {/if}
+                              {/if}
                             </slot>
                           </div>
                         </slot>
@@ -296,12 +311,12 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                                 {place.name}
                               </div>
                               <ds>{place.price}원 </ds>
-                              <dt>{place.placeName} </dt>
+                              <dt>{place.placeName}</dt>
                               {#if place.star != null}
                                 <dd>★ : {place.star}</dd>
-                                {:else}
+                              {:else}
                                 <de>△</de>
-                                {/if}
+                              {/if}
                             </slot>
                           </div>
                         </slot>
