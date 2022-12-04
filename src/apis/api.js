@@ -10,12 +10,6 @@ export const places = derived(apiData, ($apidata) => {
     if ($apidata.menus) {
         return $apidata.menus;
     }
-    else if ($apidata.SeoulNatl){
-        return $apidata.SeoulNatl;
-    }
-    else if ($apidata.cau){
-        return $apidata.cau;
-    }
     return [];
 });
     

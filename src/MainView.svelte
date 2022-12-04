@@ -10,7 +10,7 @@
 	
 	const options = [
 		{
-			value: "seouls",
+			value: "snu",
 			label: "서울대학교",
 		},
 		{
@@ -18,7 +18,7 @@
 			label: "숭실대학교",
 		},
 		{
-			value: "caus",
+			value: "cau",
 			label: "중앙대학교",
 		},
 	];

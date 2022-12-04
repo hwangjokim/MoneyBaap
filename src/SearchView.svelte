@@ -5,6 +5,7 @@
   import { apiData, places } from "./apis/api.js";
   import { minvlu } from "./store.js";
   import { maxvlu } from "./store.js";
+  import {radioValue} from "./store.js";
   import LazyLoad from "@dimfeld/svelte-lazyload";
   //Todo 20000원인거 초과로 ㄱ
   //스크롤 해걀 ㄱㄱ
@@ -78,7 +79,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
       for (let k = 0; k < words.length; k++) {
         //키워드가 남아있다면, 순회하며 검색함
         fetch(
-          "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
+          "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice/"+$radioValue.value+"?search="+
             words[k]
         ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
           .then((response) => response.json())
@@ -130,7 +131,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
   //doFetch = 키워드 추가할때 호출
   let doFetch = () => {
     fetch(
-      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search=" +
+      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice/"+$radioValue.value+"?search=" +
         words[words.length - 1] //words의 맨 마지막 원소로 검색
     ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
@@ -169,8 +170,9 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
       });
   };
   let defaultSearch = () => {
+    console.log($radioValue.value)
     fetch(
-      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice?search="
+      "http://ec2-15-165-107-63.ap-northeast-2.compute.amazonaws.com/lowPrice/"+$radioValue.value+"?search="
     ) // backend 레포에서, RestAPI 폴더로 cd 한 뒤 node app.js해서 백 서버 로컬에서 실행해야 작동함
       .then((response) => response.json())
       .then((data) => {
