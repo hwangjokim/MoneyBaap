@@ -7,10 +7,7 @@
   import { maxvlu } from "./store.js";
   import {radioValue} from "./store.js";
   import LazyLoad from "@dimfeld/svelte-lazyload";
-  //Todo 20000원인거 초과로 ㄱ
-  //스크롤 해걀 ㄱㄱ
-  //최고가순으로 정렬하기 : X
-  //버튼 눌렀을 때 갱신시키기 : O
+  //Todo : 1. 별점, 글자 잘리는 거 해결하기
   export const title = "안숭맛춤";
 
   let searchHint = "남은 메뉴 키워드 : 5/5";
@@ -255,7 +252,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
 
         <label class="checkbox" style="margin-left: 0.5em;">
           <input type="checkbox" bind:checked={isCheck} />
-          0원 표시하기!
+          0원 표시하기
         </label>
       </div>
 
@@ -317,7 +314,7 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               {#if place.star != null}
                                 <dd>★ : {place.star}</dd>
                               {:else}
-                                <de>△</de>
+                                <de>&nbsp;</de>
                               {/if}
                             </slot>
                           </div>
