@@ -54,7 +54,9 @@ Backend Github : https://github.com/hwangjokim/MoneyBaap_BackEnd
   - 메뉴를 클릭하면 해당 음식점의 네이버 플레이스로 이동한다.
 * Github 버튼
   - 오른쪽 상단 Github버튼을 클릭하면 Github MoneyBaap Repo로 이동한다.
-## 3. 프로젝트 개발 참고 서적 및 참고 사이트 URL
+## 3. 협업 스케줄링
+<img width="635" alt="image" src="https://user-images.githubusercontent.com/83453646/205617843-b3376a49-250a-4f16-a68b-e6e4f9127223.png"><img width="639" alt="image" src="https://user-images.githubusercontent.com/83453646/205617934-1bc12b4f-1872-4c1b-aed4-e251ccf02feb.png">
+## 4. 프로젝트 개발 참고 서적 및 참고 사이트 URL
 ### 1) Front
 * [Github] Svelte 기본 문법 및 가이드 </br>
 https://kyounghwan01.github.io/blog/Svelte/svelte-basic/
