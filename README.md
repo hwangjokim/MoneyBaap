@@ -62,11 +62,11 @@ https://kyounghwan01.github.io/blog/Svelte/svelte-basic/
 https://bulma.io/documentation/
 * [Github] svelte-range-slider-pips 사용 </br>
 https://github.com/simeydotme/svelte-range-slider-pips
-[AWS]아마존 웹 서비스에 배포하기 </br>
+* [AWS]아마존 웹 서비스에 배포하기 </br>
 https://sunnyfterrain.github.io/devlog/tips-ec2.html
-[Svelte] 백엔드에서 데이터 가져오기 </br>
+* [Svelte] 백엔드에서 데이터 가져오기 </br>
 https://freeseamew.gitbook.io/svelte/9.-ajax/untitled
-[Svelte] Lazy-load 라이브러리 </br>
+* [Svelte] Lazy-load 라이브러리 </br>
 https://www.npmjs.com/package/@dimfeld/svelte-lazyload
 ### 2) Crawling
 * [Selenium]크롤링 라이브러리 레퍼런스 </br>
