@@ -249,7 +249,6 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
           <input type="radio" name="foobar" on:change={onChangeOrder} />
           최고가순
         </label>
-
         <label class="checkbox" style="margin-left: 0.5em;">
           <input type="checkbox" bind:checked={isCheck} />
           0원 표시하기
@@ -280,7 +279,6 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                                 {place.name}
                               </div>
                               <ds>{place.price}원 </ds>
-
                               <dt>{place.placeName}</dt>
                               {#if place.star != null}
                                 <dd>★ : {place.star}</dd>

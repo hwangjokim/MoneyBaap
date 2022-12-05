@@ -193,6 +193,7 @@ section{
     float:left;
     border: 1px solid #aaa;
     width:46.5%;
+    min-height: 33%;
     max-height:33%;
     border-radius: 7px;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
@@ -202,12 +203,13 @@ section{
     @include mobile{
         width: 95%;
         height: 30%;
+        font-size: 15px;
     }
 }
 
 img{
-    height:85px;
-    width:85px;
+    height:90px;
+    width:90px;
 }
 .pic{
     float:left;
@@ -218,6 +220,10 @@ img{
     width:100%;
     max-height:fit-content;
     margin-left:2em;
+}
+
+.m_name{
+        max-width: 90%;
 }
 
 .listOfPlace::-webkit-scrollbar {
