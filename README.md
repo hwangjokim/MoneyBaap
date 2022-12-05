@@ -55,3 +55,39 @@ Backend Github : https://github.com/hwangjokim/MoneyBaap_BackEnd
 * Github 버튼
   - 오른쪽 상단 Github버튼을 클릭하면 Github MoneyBaap Repo로 이동한다.
 ## 3. 프로젝트 개발 참고 서적 및 참고 사이트 URL
+### 1) Front
+* [Github] Svelte 기본 문법 및 가이드 </br>
+https://kyounghwan01.github.io/blog/Svelte/svelte-basic/
+* [CSS] 사용한 css 프레임워크, Bulma </br>
+https://bulma.io/documentation/
+* [Github] svelte-range-slider-pips 사용 </br>
+https://github.com/simeydotme/svelte-range-slider-pips
+[AWS]아마존 웹 서비스에 배포하기 </br>
+https://sunnyfterrain.github.io/devlog/tips-ec2.html
+[Svelte] 백엔드에서 데이터 가져오기 </br>
+https://freeseamew.gitbook.io/svelte/9.-ajax/untitled
+[Svelte] Lazy-load 라이브러리 </br>
+https://www.npmjs.com/package/@dimfeld/svelte-lazyload
+### 2) Crawling
+* [Selenium]크롤링 라이브러리 레퍼런스 </br>
+https://www.selenium.dev/documentation/webdriver/
+### 3) API
+* [poiemaweb] Nods.js의 모듈화와 npm </br>
+https://poiemaweb.com/nodejs-npm
+* [Expressjs] DB에서 json형식으로 추출하기 </br>
+https://expressjs.com/ko/api.html
+* [poiemaweb] Node.js에서 비밀 설정 정보(Secrets) 관리 </br>
+https://poiemaweb.com/nodejs-keeping-secrets
+* [tistory] Node.js dotenv 모듈과 .env 사용하여 sql 비밀번호 숨기기 </br>
+https://jacobgrowthstory.tistory.com/18
+* [aws reference] API란 무엇입니까? </br>
+https://aws.amazon.com/ko/what-is/api/
+* [tistory] AWS 기초 이해하기 </br>
+https://whatisthenext.tistory.com/122
+* [Naver Developers] 네이버 Open API 사용 가이드 </br>
+https://developers.naver.com/docs/common/openapiguide/apilist.md
+### 4) DB
+* [mongoDB reference] mongo DB에 json형식의 데이터 입력 및 추출 </br>
+https://www.mongodb.com/docs/database-tools/mongoimport/
+* [MySQL reference] 데이터 정렬 </br>
+https://dev.mysql.com/doc/refman/8.0/en/sorting-rows.html
