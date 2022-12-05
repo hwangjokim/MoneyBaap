@@ -6,7 +6,9 @@
   import { minvlu } from "./store.js";
   import { maxvlu } from "./store.js";
   import {radioValue} from "./store.js";
+  import {replace } from 'svelte-spa-router'
   import LazyLoad from "@dimfeld/svelte-lazyload";
+  import { onMount } from 'svelte';
   //Todo : 1. 별점, 글자 잘리는 거 해결하기
   export const title = "안숭맛춤";
 
@@ -19,6 +21,13 @@
   let orderFlag = 0;
   let maxValueForSearch = $maxvlu;
   const alt = "noimg.png";
+
+  onMount( () => {
+    console.log("ㅎㄴ")
+    if ($radioValue.value == undefined) replace("/");
+  }) ;
+
+
   //promise가 갱신될 때 마다 (어떻게든) 새롭게 서버에서 쿼리보내서 가져오는 느낌
   let onKeyDown = (e) => {
     switch (e.keyCode) {
