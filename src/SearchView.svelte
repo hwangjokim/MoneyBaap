@@ -277,9 +277,9 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                         <slot>
                           <div class="pic">
                             {#if place.imgUrl !== null}
-                              <img src={place.imgUrl} />
+                              <img src={place.imgUrl}/>
                             {:else}
-                              <img src={alt} />
+                              <img src={alt}/>
                             {/if}
                           </div>
                           <div class="menuInfo">
@@ -290,9 +290,9 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               <ds>{place.price}원 </ds>
                               <dt>{place.placeName}</dt>
                               {#if place.star != null}
-                                <dd>★ : {place.star}</dd>
+                                <dd>★ : {place.star}   |   {place.distance}m </dd>
                               {:else}
-                                <de>&nbsp;</de>
+                                <de>{place.distance}m </de>
                               {/if}
                             </slot>
                           </div>
@@ -319,9 +319,9 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               <ds>{place.price}원 </ds>
                               <dt>{place.placeName}</dt>
                               {#if place.star != null}
-                                <dd>★ : {place.star}</dd>
+                                <dd>★ : {place.star}   |   {place.distance}m </dd>
                               {:else}
-                                <de>&nbsp;</de>
+                                <de>{place.distance}m </de>
                               {/if}
                             </slot>
                           </div>
