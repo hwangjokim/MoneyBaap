@@ -290,9 +290,17 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               <ds>{place.price}원 </ds>
                               <dt>{place.placeName}</dt>
                               {#if place.star != null}
-                                <dd>★ : {place.star}   |   {place.distance}m </dd>
+                                {#if place.distance<1000}
+                                <dd>★ : {place.star}   |   {place.distance} m </dd>
+                                {:else}
+                                <dd>★ : {place.star}   |   {place.distance/1000} km </dd>
+                                {/if}
                               {:else}
-                                <de>{place.distance}m </de>
+                                {#if place.distance<1000}
+                                <dd>{place.distance} m </dd>
+                                {:else}
+                                <dd>{place.distance/1000} km </dd>
+                                {/if}
                               {/if}
                             </slot>
                           </div>
@@ -319,9 +327,17 @@ doReset 함수 : 키워드를 삭제할 때 마다 호출되는 함수
                               <ds>{place.price}원 </ds>
                               <dt>{place.placeName}</dt>
                               {#if place.star != null}
-                                <dd>★ : {place.star}   |   {place.distance}m </dd>
+                                {#if place.distance<1000}
+                                <dd>★ : {place.star}   |   {place.distance} m </dd>
+                                {:else}
+                                <dd>★ : {place.star}   |   {place.distance/1000} km </dd>
+                                {/if}
                               {:else}
-                                <de>{place.distance}m </de>
+                                {#if place.distance<1000}
+                                <dd>{place.distance} m </dd>
+                                {:else}
+                                <dd>{place.distance/1000} km </dd>
+                                {/if}
                               {/if}
                             </slot>
                           </div>
